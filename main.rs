@@ -18,7 +18,7 @@ fn tiling(width: i32, cache: &mut HashMap<i32,i32>)-> i32{
   if width<=0 {return 0;}
   //memoization:
   let ret :i32 = match cache.get(&width){
-    Some(result) => *result,
+    Some(_) => 0,
     None => tiling(width-1,cache)+tiling(width-2,cache),
   };
   *cache.entry(width).or_insert(ret)
