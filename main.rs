@@ -1,6 +1,9 @@
 use std::io;
 use std::collections::HashMap;
 //2*n 크기의 사각형을 2*1 크기의 타일로 채우는 방법의 수를 계산
+//값이 너무 크니까 MOD로 나눈 나머지를 반환한다.
+const MOD: i32 = 1000000007;
+
 fn main() {
   let mut input:String = String::new();
   println!("사각형의 가로 길이:");
@@ -19,7 +22,7 @@ fn tiling(width: i32, cache: &mut HashMap<i32,i32>)-> i32{
   //memoization:
   let ret :i32 = match cache.get(&width){
     Some(_) => 0,
-    None => tiling(width-1,cache)+tiling(width-2,cache),
+    None => (tiling(width-1,cache)+tiling(width-2,cache))%MOD,
   };
   *cache.entry(width).or_insert(ret)
 }
